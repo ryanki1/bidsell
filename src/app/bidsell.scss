@@ -1,0 +1,110 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+
+
+$bidsell-width: 50%;
+$bidsell-height: 120px;
+
+.bidsell {
+
+  height: $bidsell-height;
+  width: $bidsell-width;
+
+  .header {
+    height: .2 * $bidsell-height;
+    width: 100%;
+    div.currency-pair, div.time {
+      float:left;
+      width: 50%;
+    }
+  }
+
+  .upper-body {
+    position: relative;
+    .low, .high {
+      float: left;
+    }
+    .low, .high {
+      width: 50%;
+      text-align: left;
+    }
+    .high {
+      text-align: right;
+    }
+    .current-spread {
+      position: absolute;
+      right: 46%;
+    }
+  }
+
+  .lower-body {
+    position: relative;
+    height: 100%;
+
+    .bid, .ask {
+      position: relative;
+      top: 5px;
+      left: 0px;
+      float: left;
+      width: 50%;
+      height: 66px;
+    }
+    .numbers {
+      height: 65%;
+    }
+    .trading-size {
+      position: absolute;
+      right: 40%;
+      bottom: 22%;
+      width: 20%;
+      text-align: center;
+    }
+    .buy-action {
+      text-align: right;
+    }
+    .cent, .pip, .arrow-pipette {
+      float: left;
+    }
+    .cent, .pip, .pipette {
+      width: 30%;
+    }
+    .cent {
+      line-height: 40px;
+    }
+    .pip {
+      font-size: 25px;
+    }
+    .arrow-pipette {
+      position: relative;
+    }
+    .arrow, .pipette {
+      position: relative;
+    }
+    .arrow {
+      top: 17px;
+      left: -8px;
+    }
+  }
+
+  .badge {
+    float: left;
+    &.red {
+      background-color: red;
+      color: white;
+    }
+    &.white {
+      background-color: white;
+      color: red;
+    }
+  }
+  &.box, .box {
+    border: 1px solid black;
+  }
+  .x {
+    float: right;
+  }
+}
+
+/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector
