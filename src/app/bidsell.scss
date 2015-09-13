@@ -1,8 +1,73 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./bower_components/material-design-icons/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(./bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+  url(./bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
+  url(./bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+// Rules for sizing the icon.
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+.material-icons.badge { color: red; }
+
+md-slider.md-default-theme[disabled]:not(.md-min).md-slider-ask .md-thumb:after {
+  background-color: rgb(255,64,129);
+}
+md-slider.md-default-theme[disabled].md-slider-ask .md-thumb:after {
+  border-color: rgb(255,64,129);
+}
+
+md-slider.md-default-theme[disabled]:not(.md-min).md-slider-sell .md-thumb:after {
+  background-color: green;
+}
+md-slider.md-default-theme[disabled].md-slider-sell .md-thumb:after {
+  border-color: green;
+}
 
 $bidsell-width: 50%;
-$bidsell-height: 120px;
+$bidsell-height: 190px;
+$bidsell-header-height: 36px;
 
 .bidsell {
 
@@ -10,11 +75,27 @@ $bidsell-height: 120px;
   width: $bidsell-width;
 
   .header {
-    height: .2 * $bidsell-height;
+    height: 36px;
     width: 100%;
-    div.currency-pair, div.time {
+    .currency-pair, .badge-time {
       float:left;
       width: 50%;
+    }
+    .currency-pair {
+      margin-top: 0;
+      md-select {
+        width: 100%;
+      }
+    }
+    .time {
+      padding-left: 34%;
+      line-height: 35px;
+    }
+    .badge {
+      margin-top: 8px;
+    }
+    .time {
+      margin-top: 5px;
     }
   }
 
@@ -40,10 +121,15 @@ $bidsell-height: 120px;
     position: relative;
     height: 100%;
 
+    .slider-ask, .slider-sell {
+      display: inline-flex;
+      width: 100%;
+    }
+
     .bid, .ask {
       position: relative;
       top: 5px;
-      left: 0px;
+      left: 0;
       float: left;
       width: 50%;
       height: 66px;
@@ -51,37 +137,8 @@ $bidsell-height: 120px;
     .numbers {
       height: 65%;
     }
-    .trading-size {
-      position: absolute;
-      right: 40%;
-      bottom: 22%;
-      width: 20%;
+    .trading-size-input {
       text-align: center;
-    }
-    .buy-action {
-      text-align: right;
-    }
-    .cent, .pip, .arrow-pipette {
-      float: left;
-    }
-    .cent, .pip, .pipette {
-      width: 30%;
-    }
-    .cent {
-      line-height: 40px;
-    }
-    .pip {
-      font-size: 25px;
-    }
-    .arrow-pipette {
-      position: relative;
-    }
-    .arrow, .pipette {
-      position: relative;
-    }
-    .arrow {
-      top: 17px;
-      left: -8px;
     }
   }
 

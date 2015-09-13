@@ -5,16 +5,15 @@
 div.bidsell.box
   div.header.box
     div.currency-pair
-      span.currency-pair.
-        EUR/USD
-    div.trading-mode
-    div.time
-      span.badge.red.
-        1
+      md-select.currency-pair(ng-model='currencyPairSelection')
+        md-option(ng-repeat='currencyPair in currencyPairs' value='{{currencyPair}}').
+          {{currencyPair}}
+    div.badge-time
+      md-icon.badge.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/image/svg/design/ic_looks_one_24px.svg')
       span.time.
         11:25:26
-      span.x.
-        x
+      md-button.x
+        md-icon.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/navigation/svg/design/ic_close_24px.svg')
   div.upper-body
     span.low.
       1.45235
@@ -23,31 +22,36 @@ div.bidsell.box
     span.high.
       1.46381
   div.lower-body
-    div.bid.box
-      div.numbers
-        span.cent.
-          1.46
-        span.pip.
-          13
-        div.arrow-pipette
-          span.pipette.
-            3
-          span.arrow.
-            ^
-      div.sell-action.
-        Sell
-    span.trading-size.box.
-      100
-    div.ask.box
-      div.numbers
-        span.cent.
-          1.46
-        span.pip.
-          16
-        div.arrow-pipette
-          span.pipette.
-            0
-          span.arrow.
-            ^
-      div.buy-action.
-        Buy
+    div.sliders
+      div.slider-ask(layout)
+        div(flex="10" layout layout-align="center center")
+          span(flex).
+            Ask
+        md-slider(flex ng-model="qBox.ask" ng-disabled="true" min="0" max="20" aria-label="ask" id="slider.ask" class="md-slider-ask")
+        div(flex="10" layout layout-align="center center")
+
+          input(flex ng-disabled="true" ng-model="qBox.ask" aria-label="ask" aria-controls="slider.ask")
+        div(flex="10" layout layout-align="center center")
+          span
+            small.
+              pips
+        md-tooltip(md-direction="right" md-visible="pipShowing").
+          "Asking price: 1.46133"
+      div.slider-sell(layout)
+        div(flex="10" layout layout-align="center center")
+          span(flex).
+            Sell
+        md-slider(flex ng-model="qBox.sell" ng-disabled="true" min="0" max="20" aria-label="sell" id="slider.sell" class="md-slider-sell")
+        div(flex="10" layout layout-align="center center")
+          input(flex ng-disabled="true" ng-model="qBox.sell" aria-label="sell" aria-controls="slider.sell")
+        div(flex="10" layout layout-align="center center")
+          span
+            small.
+              pips
+        md-tooltip(md-direction="right").
+          "Selling price: 1.46160"
+      div.trading-size(layout layout-align="center center")
+        div(flex="20" layout layout-align="center center")
+          input(flex ng-disabled="true" ng-model="qBox['trading-size']" aria-label="Trading size" class="trading-size-input")
+          md-tooltip(md-direction="bottom").
+            Trading size
