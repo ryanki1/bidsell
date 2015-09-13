@@ -3,22 +3,32 @@
 
 
 div.bidsell.box
-  div.header.box
-    div.currency-pair
-      md-select.currency-pair(ng-model='currencyPairSelection')
+  div.header.box(layout)
+
+    div.currency-pair(flex="50" layout layout-align="center center")
+      md-select.currency-pair(flex ng-model="currencyPairSelection" ng-class="{'mid-price-up': qBox['up'], 'mid-price-down': !qBox['up']}")
         md-option(ng-repeat='currencyPair in currencyPairs' value='{{currencyPair}}').
           {{currencyPair}}
-    div.badge-time
-      md-icon.badge.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/image/svg/design/ic_looks_one_24px.svg')
-      span.time.
-        11:25:26
-      md-button.x
+      md-icon.material-icons.md-18.mid-price-up(ng-if="qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_up_24px.svg")
+      md-icon.material-icons.md-18.mid-price-down(ng-if="!qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_down_24px.svg")
+      md-tooltip(ng-if="qBox.up" md-direction="bottom").
+        Average-mid-price up
+      md-tooltip(ng-if="!qBox.up" md-direction="bottom").
+        Average-mid-price down
+    div.badge-time(flex="50" layout layout-align="center center")
+      div.badge(flex="10" layout layout-align="center center")
+        md-icon.badge.material-icons.md-18(flex md-svg-icon="./bower_components/material-design-icons/image/svg/design/ic_looks_one_24px.svg")
+        md-tooltip(md-direction="bottom").
+          Trading group
+      div(flex layout layout-align="center center")
+        span.time
+          time.
+            11:25:26
+      md-button(flex="10")
         md-icon.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/navigation/svg/design/ic_close_24px.svg')
   div.upper-body
     span.low.
       1.45235
-    span.current-spread.badge.white.
-      2.7
     span.high.
       1.46381
   div.lower-body
@@ -37,6 +47,12 @@ div.bidsell.box
               pips
         md-tooltip(md-direction="right" md-visible="pipShowing").
           "Asking price: 1.46133"
+      div.current-spread(layout)
+        div(flex layout layout-align="end center")
+          input.current-spread-value(flex="10" ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread']")
+          span(flex="10")
+        md-tooltip(md-direction="right").
+          Current spread
       div.slider-sell(layout)
         div(flex="10" layout layout-align="center center")
           span(flex).
