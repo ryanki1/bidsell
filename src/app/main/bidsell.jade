@@ -1,73 +1,76 @@
 //
    Created by ryanki10 on 10/09/15.
 
-
-div.bidsell.box
-  div.header.box(layout)
-
-    div.currency-pair(flex="50" layout layout-align="center center")
-      md-select.currency-pair(flex ng-model="currencyPairSelection" ng-class="{'mid-price-up': qBox['up'], 'mid-price-down': !qBox['up']}")
-        md-option(ng-repeat='currencyPair in currencyPairs' value='{{currencyPair}}').
-          {{currencyPair}}
-      md-icon.material-icons.md-18.mid-price-up(ng-if="qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_up_24px.svg")
-      md-icon.material-icons.md-18.mid-price-down(ng-if="!qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_down_24px.svg")
-      md-tooltip(ng-if="qBox.up" md-direction="bottom").
-        Average-mid-price up
-      md-tooltip(ng-if="!qBox.up" md-direction="bottom").
-        Average-mid-price down
-    div.badge-time(flex="50" layout layout-align="center center")
-      div.badge(flex="10" layout layout-align="center center")
-        md-icon.badge.material-icons.md-18(flex md-svg-icon="./bower_components/material-design-icons/image/svg/design/ic_looks_one_24px.svg")
-        md-tooltip(md-direction="bottom").
-          Trading group
-      div(flex layout layout-align="center center")
-        span.time
-          time.
-            11:25:26
-      md-button(flex="10")
-        md-icon.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/navigation/svg/design/ic_close_24px.svg')
-  div.upper-body
-    span.low.
-      1.45235
-    span.high.
-      1.46381
-  div.lower-body
-    div.sliders
-      div.slider-ask(layout)
-        div(flex="10" layout layout-align="center center")
-          span(flex).
-            Ask
-        md-slider(flex ng-model="qBox.ask" ng-disabled="true" min="0" max="20" aria-label="ask" id="slider.ask" class="md-slider-ask")
-        div(flex="10" layout layout-align="center center")
-
-          input(flex ng-disabled="true" ng-model="qBox.ask" aria-label="ask" aria-controls="slider.ask")
-        div(flex="10" layout layout-align="center center")
-          span
-            small.
-              pips
-        md-tooltip(md-direction="right" md-visible="pipShowing").
-          "Asking price: 1.46133"
-      div.current-spread(layout)
-        div(flex layout layout-align="end center")
-          input.current-spread-value(flex="10" ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread']")
-          span(flex="10")
-        md-tooltip(md-direction="right").
-          Current spread
-      div.slider-sell(layout)
-        div(flex="10" layout layout-align="center center")
-          span(flex).
-            Sell
-        md-slider(flex ng-model="qBox.sell" ng-disabled="true" min="0" max="20" aria-label="sell" id="slider.sell" class="md-slider-sell")
-        div(flex="10" layout layout-align="center center")
-          input(flex ng-disabled="true" ng-model="qBox.sell" aria-label="sell" aria-controls="slider.sell")
-        div(flex="10" layout layout-align="center center")
-          span
-            small.
-              pips
-        md-tooltip(md-direction="right").
-          "Selling price: 1.46160"
-      div.trading-size(layout layout-align="center center")
-        div(flex="20" layout layout-align="center center")
-          input(flex ng-disabled="true" ng-model="qBox['trading-size']" aria-label="Trading size" class="trading-size-input")
+div.quote-box-page
+  div.bidsell.box
+    div.header.box(layout)
+      div.currency-pair(flex="50" layout layout-align="center center")
+        md-select.currency-pair(flex ng-model="currencyPairSelection" ng-class="{'mid-price-up': qBox['up'], 'mid-price-down': !qBox['up']}")
+          md-option(ng-repeat='currencyPair in currencyPairs' value='{{currencyPair}}').
+            {{currencyPair}}
+        md-icon.material-icons.md-18.mid-price-up(ng-if="qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_up_24px.svg")
+        md-icon.material-icons.md-18.mid-price-down(ng-if="!qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_down_24px.svg")
+        md-tooltip(ng-if="qBox.up" md-direction="bottom").
+          Average-mid-price up
+        md-tooltip(ng-if="!qBox.up" md-direction="bottom").
+          Average-mid-price down
+      div.badge-time(flex="50" layout layout-align="center center")
+        div.badge(flex="10" layout layout-align="center center")
+          md-icon.badge.material-icons.md-18(flex md-svg-icon="./bower_components/material-design-icons/image/svg/design/ic_looks_one_24px.svg")
           md-tooltip(md-direction="bottom").
-            Trading size
+            Trading group
+        div(flex layout layout-align="center center")
+          span.time
+            time.
+              {{qBox['quote-date-time']}}
+        md-button(flex="10")
+          md-icon.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/navigation/svg/design/ic_close_24px.svg')
+    div.upper-body
+      span.low.
+        {{qBox['price-min-string']}}
+      span.high.
+        {{qBox['price-max-string']}}
+    div.lower-body
+      div.sliders
+        div.slider-ask(layout)
+          div(flex="10" layout layout-align="center center")
+            span(flex).
+              Ask
+          md-slider(flex ng-model="qBox['ask-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="ask" id="slider.ask" class="md-slider-ask")
+          div(flex="10" layout layout-align="center center")
+
+            input(flex ng-disabled="true" ng-model="qBox['ask-string']" aria-label="ask" aria-controls="slider.ask")
+          div(flex="10" layout layout-align="center center")
+            span
+              small.
+                pips
+          md-tooltip(md-direction="right" md-visible="pipShowing").
+            "Asking price: 1.46133"
+        div.current-spread(layout)
+          div(flex layout layout-align="end center")
+            input.current-spread-value(flex="10" ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread-string']")
+            span(flex="10")
+          md-tooltip(md-direction="right").
+            Current spread (Sell-Ask)
+        div.slider-sell(layout)
+          div(flex="10" layout layout-align="center center")
+            span(flex).
+              Sell
+          md-slider(flex ng-model="qBox['sell-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="sell" id="slider.sell" class="md-slider-sell")
+          div(flex="10" layout layout-align="center center")
+            input(flex ng-disabled="true" ng-model="qBox['sell-string']" aria-label="sell" aria-controls="slider.sell")
+          div(flex="10" layout layout-align="center center")
+            span
+              small.
+                pips
+          md-tooltip(md-direction="right").
+            "Selling price: 1.46160"
+        div.trading-size(layout layout-align="center center")
+          div(flex="20" layout layout-align="center center")
+            input(flex ng-disabled="true" ng-model="qBox['trading-size-string']" aria-label="Trading size" class="trading-size-input")
+            md-tooltip(md-direction="bottom").
+              Trading size
+  div.button-actions(layout)
+    div.price-generator(flex layout layout-align="start center")
+      md-button.md-primary(flex="10" ng-click="getPrice()").
+        Price ignition

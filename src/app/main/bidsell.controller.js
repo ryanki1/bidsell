@@ -2,18 +2,24 @@
  * Created by ryanki10 on 12/09/15.
  */
 
+'use strict';
+
 class BidSellCtrl {
-  constructor ($scope) {
+  constructor ($scope, quotePriceGenerator) {
+
+    // Attributes
     $scope.currencyPairs = ['EUR/USD'];
     $scope.currencyPairSelection = 'EUR/USD';
-    $scope.qBox = {};
-    $scope.qBox.up = false;
-    $scope.qBox.ask = "13.3";
-    $scope.qBox.sell = "16.0";
-    $scope.qBox["current-spread"]="2.7";
-    $scope.qBox["trading-size"] = "100";
+
+    // Methods
+    $scope.getPrice = function() {
+      quotePriceGenerator.getPrice()
+        .then(function(quotePrice){
+          $scope.qBox = quotePrice.qBox;
+        });
+    }
   }
 }
 
-BidSellCtrl.$inject = ['$scope'];
+BidSellCtrl.$inject = ['$scope', 'quotePriceGenerator'];
 export default BidSellCtrl;

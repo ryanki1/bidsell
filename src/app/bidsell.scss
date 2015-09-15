@@ -72,96 +72,102 @@ $bidsell-width: 50%;
 $bidsell-height: 210px;
 $bidsell-header-height: 36px;
 
-.bidsell {
+.quote-box-page {
+  .bidsell {
 
-  height: $bidsell-height;
-  width: $bidsell-width;
+    height: $bidsell-height;
+    width: $bidsell-width;
 
-  .header {
-    .currency-pair {
-      margin-top: 0;
-      .avg-price-up {
-        background-color: green;
-      }
-      .avg-price-down {
-        background-color: red;
-      }
-      md-select,  md-select:focus .md-select-label {
-        color: white;
-        &.mid-price-up {
-          background-color: green
+    .header {
+      .currency-pair {
+        margin-top: 0;
+        .avg-price-up {
+          background-color: green;
         }
-        &.mid-price-down {
+        .avg-price-down {
           background-color: red;
         }
+        md-select,  md-select:focus .md-select-label {
+          color: white;
+          &.mid-price-up {
+            background-color: green
+          }
+          &.mid-price-down {
+            background-color: red;
+          }
+        }
       }
     }
-  }
 
-  .upper-body {
-    position: relative;
-    .low, .high {
-      float: left;
-    }
-    .low, .high {
-      width: 50%;
-      text-align: left;
-    }
-    .high {
-      text-align: right;
-    }
-    .current-spread {
-      position: absolute;
-      right: 46%;
-    }
-  }
-
-  .lower-body {
-    position: relative;
-    height: 100%;
-
-    .slider-ask, .slider-sell {
-      display: inline-flex;
-      width: 100%;
-    }
-
-    .bid, .ask {
+    .upper-body {
       position: relative;
-      top: 5px;
-      left: 0;
-      float: left;
-      width: 50%;
-      height: 66px;
+      .low, .high {
+        float: left;
+      }
+      .low, .high {
+        width: 50%;
+        text-align: left;
+      }
+      .high {
+        text-align: right;
+      }
+      .current-spread {
+        position: absolute;
+        right: 46%;
+      }
     }
-    .current-spread-value {
-      text-align: center;
-      font-size: small;
-      font-weight: bolder;
-      color: white;
-      background-color: blue;
-    }
-    .numbers {
-      height: 65%;
-    }
-    .trading-size-input {
-      text-align: center;
-    }
-  }
 
-  .badge {
-    &.red {
-      background-color: red;
-      color: white;
+    .lower-body {
+      position: relative;
+      height: 100%;
+
+      .slider-ask, .slider-sell {
+        display: inline-flex;
+        width: 100%;
+      }
+
+      .bid, .ask {
+        position: relative;
+        top: 5px;
+        left: 0;
+        float: left;
+        width: 50%;
+        height: 66px;
+      }
+      .current-spread-value {
+        text-align: center;
+        font-size: small;
+        font-weight: bolder;
+        color: white;
+        background-color: blue;
+      }
+      .numbers {
+        height: 65%;
+      }
+      .trading-size-input {
+        text-align: center;
+      }
     }
-    &.white {
-      background-color: white;
-      color: red;
+
+    .badge {
+      &.red {
+        background-color: red;
+        color: white;
+      }
+      &.white {
+        background-color: white;
+        color: red;
+      }
+    }
+    &.box, .box {
+      border: 1px solid black;
     }
   }
-  &.box, .box {
-    border: 1px solid black;
+  .button-actions {
+    height: 80px;
   }
 }
+
 
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */

@@ -4,12 +4,14 @@ import MainCtrl from './main/main.controller';
 import NavbarCtrl from '../app/components/navbar/navbar.controller';
 import DemoCtrl from '../app/main/demo.controller.js';
 import BidSellCtrl from '../app/main/bidsell.controller.js';
+import quotePriceGenerator from '../app/main/quotePriceGenerator.js';
 
 angular.module('git', ['ui.router', 'ngMaterial'])
   .controller('MainCtrl', MainCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
   .controller('DemoCtrl', DemoCtrl)
   .controller('BidSellCtrl', BidSellCtrl)
+  .factory('quotePriceGenerator', quotePriceGenerator)
 
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -24,5 +26,4 @@ angular.module('git', ['ui.router', 'ngMaterial'])
         controller: 'DemoCtrl'
       });
     $urlRouterProvider.otherwise('/');
-  })
-;
+  });
