@@ -42,34 +42,28 @@
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-// Rules for using icons as black on a light background.
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons {
+  &.badge { color: red; }
+  &.mid-price-up { color: green; }
+  &.mid-price-holds { color: grey; }
+  &.mid-price-down { color: red; }
+}
 
-// Rules for using icons as white on a dark background.
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
-.material-icons.badge { color: red; }
-.material-icons.mid-price-up { color: green; }
-
-.material-icons.mid-price-down { color: red; }
+md-select.md-default-theme .md-select-label {
+  border-bottom-color: transparent;
+}
 
 md-slider.md-default-theme[disabled].md-slider-ask .md-thumb:after {
   background-color: rgb(255,64,129);
-}
-md-slider.md-default-theme[disabled].md-slider-ask .md-thumb:after {
   border-color: rgb(255,64,129);
 }
-
 md-slider.md-default-theme[disabled].md-slider-sell .md-thumb:after {
   background-color: green;
-}
-md-slider.md-default-theme[disabled].md-slider-sell .md-thumb:after {
   border-color: green;
 }
 
 $bidsell-width: 50%;
-$bidsell-height: 210px;
+$bidsell-height: 225px;
 $bidsell-header-height: 36px;
 
 .quote-box-page {
@@ -81,16 +75,13 @@ $bidsell-header-height: 36px;
     .header {
       .currency-pair {
         margin-top: 0;
-        .avg-price-up {
-          background-color: green;
-        }
-        .avg-price-down {
-          background-color: red;
-        }
         md-select,  md-select:focus .md-select-label {
           color: white;
           &.mid-price-up {
             background-color: green
+          }
+          &.mid-price-holds {
+            background-color: grey;
           }
           &.mid-price-down {
             background-color: red;
@@ -99,6 +90,7 @@ $bidsell-header-height: 36px;
       }
     }
     .upper-body {
+      margin-top: 10px;
       .min-price {
         text-align: left;
       }

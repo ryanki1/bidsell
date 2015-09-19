@@ -2,17 +2,20 @@
    Created by ryanki10 on 10/09/15.
 
 div.quote-box-page
-  div.bidsell.box
+  div.bidsell.box(id="quoteBox")
     div.header.box(layout)
       div.currency-pair(flex="50" layout layout-align="center center")
-        md-select.currency-pair(flex ng-model="currencyPairSelection" ng-class="{'mid-price-up': qBox['up'], 'mid-price-down': !qBox['up']}")
+        md-select.currency-pair(flex ng-model="currencyPairSelection" ng-class="{'mid-price-up': qBox.direction === 1, 'mid-price-down': qBox.direction === -1, 'mid-price-holds': qBox.direction === 0}")
           md-option(ng-repeat='currencyPair in currencyPairs' value='{{currencyPair}}').
             {{currencyPair}}
-        md-icon.material-icons.md-18.mid-price-up(ng-if="qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_up_24px.svg")
-        md-icon.material-icons.md-18.mid-price-down(ng-if="!qBox.up" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_down_24px.svg")
-        md-tooltip(ng-if="qBox.up" md-direction="bottom").
+        md-icon.material-icons.md-18.mid-price-up(ng-if="qBox.direction === 1" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_up_24px.svg")
+        md-icon.material-icons.md-18.mid-price-holds(ng-if="qBox.direction === 0" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_flat_24px.svg")
+        md-icon.material-icons.md-18.mid-price-down(ng-if="qBox.direction === -1" flex="10" md-svg-icon="./bower_components/material-design-icons/action/svg/design/ic_trending_down_24px.svg")
+        md-tooltip(ng-if="qBox.direction === 1" md-direction="bottom").
           Average-mid-price up
-        md-tooltip(ng-if="!qBox.up" md-direction="bottom").
+        md-tooltip(ng-if="qBox.direction === 0" md-direction="bottom").
+          Average-mid-price holds
+        md-tooltip(ng-if="qBox.direction === -1" md-direction="bottom").
           Average-mid-price down
       div.badge-time(flex="50" layout layout-align="center center")
         div.badge(flex="10" layout layout-align="center center")
@@ -60,7 +63,7 @@ div.quote-box-page
             input.current-spread-value(flex="10" ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread-string']")
             span(flex="10")
           md-tooltip(md-direction="right").
-            Current spread {{qBox['current-spread']}}
+            Current spread
         div.slider-sell(layout)
           div(flex="10" layout layout-align="center center")
             span.label(flex).
@@ -80,6 +83,14 @@ div.quote-box-page
             md-tooltip(md-direction="bottom").
               Trading size
   div.button-actions(layout)
-    div.price-generator(flex layout layout-align="start center")
-      md-button.md-primary(flex="10" ng-click="getPrice()").
+    div.price-generator(flex="10" layout layout-align="start center")
+      md-button.md-primary(flex ng-click="triggerIgnition(ignitionInterval)").
         Price ignition
+    div(flex="5" layout layout-align="center center")
+      span(flex layout layout-align="center center").
+        every
+    div(flex="5" layout layout-align="center center")
+      input(flex type="number" ng-model="ignitionInterval" aria-label="Quotebox Interval" aria-controls="quoteBox")
+    div(flex="5" layout layout-align="center center")
+      span(flex layout layout-align="end center").
+        seconds
