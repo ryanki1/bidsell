@@ -23,48 +23,57 @@ div.quote-box-page
           span.time
             time.
               {{qBox['quote-date-time']}}
-        md-button(flex="10")
+        md-button(flex="10" layout layout-align="center center")
           md-icon.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/navigation/svg/design/ic_close_24px.svg')
-    div.upper-body
-      span.low.
-        {{qBox['price-min-string']}}
-      span.high.
-        {{qBox['price-max-string']}}
+    div.upper-body(layout)
+      div(flex="10")
+      div.min-price(flex="10" layout layout-align="center center")
+        span(flex).
+          {{qBox['price-min-string'].substr(0,3)}}<b>{{qBox['price-min-string'].substr(3,3)}}</b>{{qBox['price-min-string'].substr(6,1)}}
+        md-tooltip(md-direction="bottom").
+          Minimum Price
+      div(flex)
+      div.max-price(flex="10" layout layout-align="center center")
+        span(flex).
+          {{qBox['price-max-string'].substr(0,3)}}<b>{{qBox['price-max-string'].substr(3,3)}}</b>{{qBox['price-max-string'].substr(6,1)}}
+        md-tooltip(md-direction="bottom").
+          Maximum Price
+      div(flex="20")
     div.lower-body
       div.sliders
         div.slider-ask(layout)
           div(flex="10" layout layout-align="center center")
-            span(flex).
+            span.label(flex).
               Ask
           md-slider(flex ng-model="qBox['ask-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="ask" id="slider.ask" class="md-slider-ask")
           div(flex="10" layout layout-align="center center")
 
             input(flex ng-disabled="true" ng-model="qBox['ask-string']" aria-label="ask" aria-controls="slider.ask")
           div(flex="10" layout layout-align="center center")
-            span
+            span.label
               small.
                 pips
           md-tooltip(md-direction="right" md-visible="pipShowing").
-            "Asking price: 1.46133"
+            Asking price: {{qBox['ask-price']}}
         div.current-spread(layout)
           div(flex layout layout-align="end center")
             input.current-spread-value(flex="10" ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread-string']")
             span(flex="10")
           md-tooltip(md-direction="right").
-            Current spread (Sell-Ask)
+            Current spread {{qBox['current-spread']}}
         div.slider-sell(layout)
           div(flex="10" layout layout-align="center center")
-            span(flex).
+            span.label(flex).
               Sell
           md-slider(flex ng-model="qBox['sell-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="sell" id="slider.sell" class="md-slider-sell")
           div(flex="10" layout layout-align="center center")
             input(flex ng-disabled="true" ng-model="qBox['sell-string']" aria-label="sell" aria-controls="slider.sell")
           div(flex="10" layout layout-align="center center")
-            span
+            span.label
               small.
                 pips
           md-tooltip(md-direction="right").
-            "Selling price: 1.46160"
+            Selling price: {{qBox['sell-price']}}
         div.trading-size(layout layout-align="center center")
           div(flex="20" layout layout-align="center center")
             input(flex ng-disabled="true" ng-model="qBox['trading-size-string']" aria-label="Trading size" class="trading-size-input")

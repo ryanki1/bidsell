@@ -54,14 +54,14 @@
 
 .material-icons.mid-price-down { color: red; }
 
-md-slider.md-default-theme[disabled]:not(.md-min).md-slider-ask .md-thumb:after {
+md-slider.md-default-theme[disabled].md-slider-ask .md-thumb:after {
   background-color: rgb(255,64,129);
 }
 md-slider.md-default-theme[disabled].md-slider-ask .md-thumb:after {
   border-color: rgb(255,64,129);
 }
 
-md-slider.md-default-theme[disabled]:not(.md-min).md-slider-sell .md-thumb:after {
+md-slider.md-default-theme[disabled].md-slider-sell .md-thumb:after {
   background-color: green;
 }
 md-slider.md-default-theme[disabled].md-slider-sell .md-thumb:after {
@@ -98,22 +98,15 @@ $bidsell-header-height: 36px;
         }
       }
     }
-
     .upper-body {
-      position: relative;
-      .low, .high {
-        float: left;
-      }
-      .low, .high {
-        width: 50%;
+      .min-price {
         text-align: left;
       }
-      .high {
+      .max-price {
         text-align: right;
       }
-      .current-spread {
-        position: absolute;
-        right: 46%;
+      b {
+        color: blue;
       }
     }
 
@@ -161,6 +154,9 @@ $bidsell-header-height: 36px;
     }
     &.box, .box {
       border: 1px solid black;
+    }
+    .label {
+      text-align: center;
     }
   }
   .button-actions {
