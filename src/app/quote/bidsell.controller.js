@@ -30,7 +30,7 @@ class BidSellCtrl {
             .getPrice()
             .then(function(data) {
               showQuote(data);
-            })
+            });
         },
         interval * 1000);
     };
@@ -69,14 +69,22 @@ class BidSellCtrl {
       $scope.qBox = qBox;
     }
     $scope.getAskPrice = function(){
-      var tooltip = 'Asking Price: ' +
+      var tooltip;
+      if (!$scope.qBox) {
+        return;
+      }
+      tooltip = 'Asking Price: ' +
                     $scope.qBox['ask-price'].toString().substr(0,3) + '<b class="yellow">' +
                     $scope.qBox['ask-price'].toString().substr(3,3) + '</b>' +
                     $scope.qBox['ask-price'].toString().substr(6,1);
       return $sce.trustAsHtml(tooltip);
     };
     $scope.getSellingPrice = function(){
-      var tooltip = 'Selling Price: ' +
+      var tooltip;
+      if (!$scope.qBox) {
+        return;
+      }
+      tooltip = 'Selling Price: ' +
         $scope.qBox['sell-price'].toString().substr(0,3) + '<b class="yellow">' +
         $scope.qBox['sell-price'].toString().substr(3,3) + '</b>' +
         $scope.qBox['sell-price'].toString().substr(6,1);
