@@ -6,7 +6,7 @@ import DemoCtrl from '../app/main/demo.controller.js';
 import BidSellCtrl from '../app/main/bidsell.controller.js';
 import quotePriceGenerator from '../app/main/quotePriceGenerator.js';
 
-angular.module('git', ['ui.router', 'ngMaterial'])
+angular.module('git', ['ngSanitize', 'ui.router', 'ngMaterial'])
   .controller('MainCtrl', MainCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
   .controller('DemoCtrl', DemoCtrl)

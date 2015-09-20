@@ -17,16 +17,16 @@ class Quote(object):
 class QuoteResource(pyrestful.rest.RestHandler):
   @get(_path="/quote", _produces=mediatypes.APPLICATION_JSON)
   def getQuoteJson(self):
-    price_min = random.randint(145000,146000)/100000
-    price_max = random.randint(146000,147000)/100000
-    ask_price = random.randint(price_min*100000,price_min*100000+1000)/100000
-    sell_price = random.randint(ask_price*100000,ask_price*100000+200)/100000
+    price_min = random.randint(145000,146000)
+    price_max = random.randint(146000,147000)
+    ask_price = random.randint(price_min,146000)
+    sell_price = random.randint(ask_price,price_max)
     trading_size = random.randint(50,150)
     quote = Quote()
-    quote.price_min = price_min
-    quote.price_max = price_max
-    quote.ask_price = ask_price
-    quote.sell_price = sell_price
+    quote.price_min = price_min/100000
+    quote.price_max = price_max/100000
+    quote.ask_price = ask_price/100000
+    quote.sell_price = sell_price/100000
     quote.trading_size = trading_size
     return quote
 

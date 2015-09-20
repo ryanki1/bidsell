@@ -49,8 +49,14 @@
   &.mid-price-down { color: red; }
 }
 
-md-select.md-default-theme .md-select-label {
-  border-bottom-color: transparent;
+md-select  {
+  &.md-default-theme {
+    .md-select-label {
+      border-bottom-color: transparent;
+    }
+  }
+  padding: 5px;
+  font-weight: bold;
 }
 
 md-slider.md-default-theme[disabled].md-slider-ask .md-thumb:after {
@@ -62,8 +68,14 @@ md-slider.md-default-theme[disabled].md-slider-sell .md-thumb:after {
   border-color: green;
 }
 
-$bidsell-width: 50%;
-$bidsell-height: 225px;
+md-tooltip {
+  .yellow {
+    color: yellow;
+  }
+}
+
+$bidsell-width: 100%;
+$bidsell-height: 235px;
 $bidsell-header-height: 36px;
 
 .quote-box-page {
@@ -74,9 +86,8 @@ $bidsell-header-height: 36px;
 
     .header {
       .currency-pair {
-        margin-top: 0;
         md-select,  md-select:focus .md-select-label {
-          color: white;
+          margin: 6px;
           &.mid-price-up {
             background-color: green
           }
@@ -85,6 +96,10 @@ $bidsell-header-height: 36px;
           }
           &.mid-price-down {
             background-color: red;
+          }
+          .md-select-value {
+            border-bottom-color: transparent;
+            color: white;
           }
         }
       }
@@ -153,6 +168,9 @@ $bidsell-header-height: 36px;
   }
   .button-actions {
     height: 80px;
+  }
+  .cp {
+    cursor: pointer;
   }
 }
 

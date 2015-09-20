@@ -5,7 +5,7 @@
 'use strict';
 
 class BidSellCtrl {
-  constructor($scope, quotePriceGenerator, $interval) {
+  constructor($scope, quotePriceGenerator, $interval, $sce) {
     var midPriceDB = [];
     function midPriceAvgDirection (min, max) {
       var midPrice = Math.round((min*100000 + max*100000)/2);
@@ -37,7 +37,7 @@ class BidSellCtrl {
     function showQuote(data) {
       var date = new Date();
       const quoteZoom = 100000;
-      const quotePipsWindow = -3;
+      const quotePipsWindow = -4;
       const quotePipsFinder = 10;
 
       var quote = data.data;
@@ -47,6 +47,7 @@ class BidSellCtrl {
           var ret = ('00'.concat(term)).substr(-2);
           return ret;
         });
+
       var qBox = {};
       qBox.direction = midPriceAvgDirection(quote.price_min, quote.price_max);
       qBox['quote-date-time'] = paddedTime.join(':');
@@ -54,24 +55,35 @@ class BidSellCtrl {
       qBox['price-min-string'] = qBox['price-min'].toFixed(5);
       qBox['price-max'] = quote.price_max;
       qBox['price-max-string'] = qBox['price-max'].toFixed(5);
-      qBox['price-range'] = Math.trunc((qBox['price-max'] - qBox['price-min']) * 10000);
-      qBox.up = false;
+      qBox['price-range'] = Math.round((qBox['price-max'] - qBox['price-min']) * quoteZoom / quotePipsFinder);
       qBox['ask-price'] = quote.ask_price;
       qBox['sell-price'] = quote.sell_price;
-      qBox['ask-start'] = Math.trunc(qBox['ask-price'] * 10000 - qBox['price-min'] * 10000);
-      qBox['sell-start'] = Math.trunc(qBox['sell-price'] * 10000 - qBox['price-min'] * 10000);
-      qBox.ask = (qBox['ask-price'] * 100000).toString().substr(-3) / 10;
+      qBox['ask-start'] = Math.round((quote.ask_price * quoteZoom / quotePipsFinder) - (quote.price_min * quoteZoom / quotePipsFinder));
+      qBox['sell-start'] = Math.round((quote.sell_price * quoteZoom / quotePipsFinder) - (quote.price_min * quoteZoom / quotePipsFinder));
+      qBox.ask = (qBox['ask-price'] * quoteZoom).toString().substr(quotePipsWindow) / quotePipsFinder;
       qBox['ask-string'] = qBox.ask.toFixed(1);
-      qBox.sell = (qBox['sell-price'] * 100000).toString().substr(-3) / 10;
+      qBox.sell = (qBox['sell-price'] * quoteZoom).toString().substr(quotePipsWindow) / quotePipsFinder;
       qBox['sell-string'] = qBox.sell.toFixed(1);
-      qBox['current-spread'] = Math.trunc((quote['sell_price'] - quote['ask_price']) * 100000) / 10;
-      qBox['current-spread-string'] = qBox['current-spread'].toFixed(1);
-      qBox['trading-size'] = quote.trading_size;
-      qBox['trading-size-string'] = qBox['trading-size'].toString();
+      qBox['current-spread-string'] = (qBox.sell - qBox.ask).toFixed(1);
+      qBox['trading-size-string'] = quote.trading_size;
       $scope.qBox = qBox;
     }
+    $scope.getAskPrice = function(){
+      var tooltip = 'Asking Price: ' +
+                    $scope.qBox['ask-price'].toString().substr(0,3) + '<b class="yellow">' +
+                    $scope.qBox['ask-price'].toString().substr(3,3) + '</b>' +
+                    $scope.qBox['ask-price'].toString().substr(6,1);
+      return $sce.trustAsHtml(tooltip);
+    };
+    $scope.getSellingPrice = function(){
+      var tooltip = 'Selling Price: ' +
+        $scope.qBox['sell-price'].toString().substr(0,3) + '<b class="yellow">' +
+        $scope.qBox['sell-price'].toString().substr(3,3) + '</b>' +
+        $scope.qBox['sell-price'].toString().substr(6,1);
+      return $sce.trustAsHtml(tooltip);
+    };
   }
 }
 
-BidSellCtrl.$inject = ['$scope', 'quotePriceGenerator', '$interval'];
+BidSellCtrl.$inject = ['$scope', 'quotePriceGenerator', '$interval', '$sce'];
 export default BidSellCtrl;
