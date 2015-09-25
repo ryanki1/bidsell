@@ -2,10 +2,12 @@
   "name": "git",
   "version": "0.0.0",
   "dependencies": {
-    "node-sass": "^3.3.3"
+    "node-sass": "^3.3.3",
+    "bower": "1.5.2"
   },
   "scripts": {
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "devDependencies": {
     "browser-sync": "~2.1.4",
