@@ -39,6 +39,7 @@ module.exports = function(options) {
   }));
 
   gulp.task('serve', ['watch'], function () {
+    require('node-sass').server(__dirname, { port: process.env.PORT || 9000 });
     browserSyncInit([options.tmp + '/serve', options.src]);
   });
 
