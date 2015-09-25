@@ -28,6 +28,7 @@ module.exports = function(options) {
     server.middleware = middleware();
 
     browserSync.instance = browserSync.init({
+      port: (process.env.PORT || 5000),
       startPath: '/',
       server: server,
       browser: browser
