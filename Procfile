@@ -1,2 +1,2 @@
 web: npm start
-web: python src/quoteService.py
+quote: python src/quoteService.py
