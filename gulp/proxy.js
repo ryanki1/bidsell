@@ -18,7 +18,8 @@
 var proxyMiddleware = require('http-proxy-middleware');
 
 var options = {
-  target: 'http://quoteservce.herokuapp.com:80'
+  target: 'http://quoteservce.herokuapp.com:80',
+  changeOrigin: true
 };
 
 var proxy = proxyMiddleware('/quote', options);
