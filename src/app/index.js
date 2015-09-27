@@ -1,11 +1,11 @@
 'use strict';
 
-import BidSellCtrl from '../app/quote/bidsell.controller.js';
 import quotePriceGenerator from '../app/quote/quotePriceGenerator.js';
+import bidSellDirective from '../app/quote/bidsell.directive.js';
 
-angular.module('git', ['ngSanitize', 'ui.router', 'ngMaterial'])
-  .controller('BidSellCtrl', BidSellCtrl)
+angular.module('quote', ['ngSanitize', 'ui.router', 'ngMaterial'])
   .factory('quotePriceGenerator', quotePriceGenerator)
+  .directive('bidSellQuote', bidSellDirective)
   .config(function($mdThemingProvider){
     $mdThemingProvider.theme('default')
       .primaryPalette('purple', {
@@ -19,8 +19,7 @@ angular.module('git', ['ngSanitize', 'ui.router', 'ngMaterial'])
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'app/quote/bidsell.html',
-        controller: 'BidSellCtrl'
+        templateUrl: 'app/showQuote.html'
       });
     $urlRouterProvider.otherwise('/');
   });

@@ -75,10 +75,10 @@ md-tooltip {
 }
 
 $bidsell-width: 100%;
-$bidsell-height: 235px;
+$bidsell-height: 270px;
 $bidsell-header-height: 36px;
 
-.quote-box-page {
+.quote-box-component {
   .bidsell {
 
     height: $bidsell-height;
@@ -173,9 +173,3 @@ $bidsell-header-height: 36px;
     cursor: pointer;
   }
 }
-
-
-/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
-   all your sass files automatically */
-// injector
-// endinjector

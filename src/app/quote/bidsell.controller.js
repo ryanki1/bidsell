@@ -49,13 +49,14 @@ class BidSellCtrl {
         });
 
       var qBox = {};
+      $scope.qBox = qBox; // Reset
       qBox.direction = midPriceAvgDirection(quote.price_min, quote.price_max);
       qBox['quote-date-time'] = paddedTime.join(':');
       qBox['price-min'] = quote.price_min;
       qBox['price-min-string'] = qBox['price-min'].toFixed(5);
       qBox['price-max'] = quote.price_max;
       qBox['price-max-string'] = qBox['price-max'].toFixed(5);
-      qBox['price-range'] = Math.round((qBox['price-max'] - qBox['price-min']) * quoteZoom / quotePipsFinder);
+      qBox['price-range'] = Math.round(quote.price_max * quoteZoom / quotePipsFinder - quote.price_min * quoteZoom / quotePipsFinder);
       qBox['ask-price'] = quote.ask_price;
       qBox['sell-price'] = quote.sell_price;
       qBox['ask-start'] = Math.round((quote.ask_price * quoteZoom / quotePipsFinder) - (quote.price_min * quoteZoom / quotePipsFinder));
@@ -66,7 +67,9 @@ class BidSellCtrl {
       qBox['sell-string'] = qBox.sell.toFixed(1);
       qBox['current-spread-string'] = (qBox.sell - qBox.ask).toFixed(1);
       qBox['trading-size-string'] = quote.trading_size;
-      $scope.qBox = qBox;
+      //console.log(JSON.stringify(qBox));  For debugging ;-) There appears to be a md-slider bug
+      //                                    see https://github.com/angular/material/issues/4860
+      $scope.qBox = angular.copy(qBox);
     }
     $scope.getAskPrice = function(){
       var tooltip;
