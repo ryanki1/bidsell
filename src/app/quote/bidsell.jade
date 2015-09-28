@@ -27,73 +27,72 @@ div.quote-box-component
             md-icon.badge.material-icons.md-18(md-svg-icon="./bower_components/material-design-icons/image/svg/design/ic_looks_one_24px.svg" aria-label="Trading group")
             md-tooltip(md-direction="bottom").
               Trading group
-        div.time(flex layout layout-align="center center")
+        div.time(flex layout layout-align="center center" hide-sm)
           time.
             {{qBox['quote-date-time']}}
-        div.form-action-close.cp
+        span(flex show-sm hide-gt-sm)
+        div.form-action-close.cp(layout)
           md-button.md-icon-button
             md-icon.material-icons.md-18(md-svg-icon='./bower_components/material-design-icons/navigation/svg/design/ic_close_24px.svg' aria-label="Close Quote")
               md-tooltip(md-direction="bottom").
                 Close
-    div.upper-body(layout)
-      div(flex="10")
-      div.min-price.cp(flex="10" layout layout-align="center center")
-        span(flex).
-          {{qBox['price-min-string'].substr(0,3)}}<b>{{qBox['price-min-string'].substr(3,3)}}</b>{{qBox['price-min-string'].substr(6,1)}}
-        md-tooltip(md-direction="bottom").
-          Minimum Price
-      div(flex)
-      div.max-price.cp(flex="10" layout layout-align="center center")
-        span(flex).
-          {{qBox['price-max-string'].substr(0,3)}}<b>{{qBox['price-max-string'].substr(3,3)}}</b>{{qBox['price-max-string'].substr(6,1)}}
-        md-tooltip(md-direction="bottom").
-          Maximum Price
-      div(flex="20")
-    div.lower-body
-      div.sliders
-        div.slider-ask.cp(layout)
-          div(flex="10" layout layout-align="center center")
-            span.label(flex).
+    md-card
+      div.upper-body
+        div.min-max-price(layout="row")
+          span(flex="10")
+          div.min-price.cp
+            span.
+              {{qBox['price-min-string'].substr(0,3)}}<b>{{qBox['price-min-string'].substr(3,3)}}</b>{{qBox['price-min-string'].substr(6,1)}}
+            md-tooltip(md-direction="bottom").
+              Minimum Price
+          span(flex).
+            &nbsp;
+          div.max-price.cp
+            span(flex).
+              {{qBox['price-max-string'].substr(0,3)}}<b>{{qBox['price-max-string'].substr(3,3)}}</b>{{qBox['price-max-string'].substr(6,1)}}
+            md-tooltip(md-direction="bottom").
+              Maximum Price
+          span(flex="15")
+      md-card-content.lower-body
+        div.sliders
+          div.sliders-ask.cp(layout="row")
+            span.label(flex="10" layout layout-align="center center").
               Ask
-          md-slider(flex ng-model="qBox['ask-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="ask" id="slider.ask" class="md-slider-ask")
-          div(flex="10" layout layout-align="center center")
-            input.cp(flex ng-disabled="true" ng-model="qBox['ask-string']" aria-label="ask" aria-controls="slider.ask")
-          div(flex="10" layout layout-align="center center")
-            span.label
-              small.
-                pips
-          md-tooltip(md-direction="top" md-visible="pipShowing")
-            span(ng-bind-html="getAskPrice()")
-        div.current-spread.cp(layout)
-          div(flex layout layout-align="end center")
-            input.current-spread-value.cp(flex="10" ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread-string']")
-            span(flex="10")
+            md-slider(flex ng-model="qBox['ask-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="ask" id="slider.ask" class="md-slider-ask")
+            md-input-container(flex="15")
+              input.asking-price.cp(ng-disabled="true" ng-model="qBox['ask-string']" aria-label="ask" aria-controls="slider.ask")
+              span.label
+                small.
+                  pips
+            md-tooltip(md-direction="top" md-visible="pipShowing")
+              span(ng-bind-html="getAskPrice()")
+          div.current-spread.cp(layout="row" layout-align="end center")
+            md-input-container(flex="15")
+              input.current-spread-value.cp(ng-disabled="true" aria-label="Current spread" ng-model="qBox['current-spread-string']")
             md-tooltip(md-direction="top").
               Current spread
-        div.slider-sell.cp(layout)
-          div(flex="10" layout layout-align="center center")
-            span.label(flex).
+          div.sliders-sell.cp(layout="row")
+            span.label(flex="10" layout layout-align="center center").
               Sell
-          md-slider(flex ng-model="qBox['sell-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="sell" id="slider.sell" class="md-slider-sell")
-          div(flex="10" layout layout-align="center center")
-            input.cp(flex ng-disabled="true" ng-model="qBox['sell-string']" aria-label="sell" aria-controls="slider.sell")
-          div(flex="10" layout layout-align="center center")
-            span.label
-              small.
-                pips
-          md-tooltip(md-direction="top")
-            span(ng-bind-html="getSellingPrice()")
-        div.trading-size(layout layout-align="center center")
-          div(flex="20" layout layout-align="center center")
-            input.cp(flex ng-disabled="true" ng-model="qBox['trading-size-string']" aria-label="Trading size" class="trading-size-input")
+            md-slider(flex ng-model="qBox['sell-start']" ng-disabled="true" min="0" max="{{qBox['price-range']}}" aria-label="sell" id="slider.sell" class="md-slider-sell")
+            md-input-container(flex="15")
+              input.selling-price.cp(ng-disabled="true" ng-model="qBox['sell-string']" aria-label="sell" aria-controls="slider.sell")
+              span.label
+                small.
+                  pips
+            md-tooltip(md-direction="top")
+              span(ng-bind-html="getSellingPrice()")
+          div.trading-size(layout="row" layout-align="center")
+            md-input-container(flex="10")
+              input.cp(ng-disabled="true" ng-model="qBox['trading-size-string']" aria-label="Trading size" class="trading-size-input")
             md-tooltip(md-direction="top").
               Trading size
-  div.button-actions(layout)
-    div.price-generator(flex="50" layout layout-align="start center")
-      md-button.md-primary.md-hue-3(flex ng-click="triggerIgnition(ignitionInterval)").
-        Price ignition
-    div(flex="50" layout layout-align="center center")
-      md-input-container(flex)
-        label.
-          Frequency in seconds
-        input(flex type="number" ng-model="ignitionInterval" aria-label="Quotebox Interval" aria-controls="quoteBox")
+        md-divider
+        div.button-actions.md-actions(layout="row" layout-align="end center")
+          div.price-generator(flex="50" layout layout-align="end")
+            md-button.md-primary.md-hue-3.ignition(ng-click="triggerIgnition(ignitionInterval)").
+              Price ignition
+          md-input-container(flex="50")
+            label.
+              Frequency in seconds
+            input(type="number" ng-model="ignitionInterval" aria-label="Quotebox Interval" aria-controls="quoteBox")

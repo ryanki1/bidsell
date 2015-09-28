@@ -11,6 +11,13 @@
   url(../../../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
   url(../../../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
 }
+
+$bidsell-width: 100%;
+$bidsell-height: 470px;
+$bidsell-header-height: 36px;
+$accent: #7093DB;
+$red: #AF0000;
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -43,10 +50,10 @@
 .material-icons.md-48 { font-size: 48px; }
 
 .material-icons {
-  &.badge { color: red; }
+  &.badge { color: $red; }
   &.mid-price-up { color: green; }
   &.mid-price-holds { color: grey; }
-  &.mid-price-down { color: red; }
+  &.mid-price-down { color: $red; }
 }
 
 md-select  {
@@ -74,10 +81,6 @@ md-tooltip {
   }
 }
 
-$bidsell-width: 100%;
-$bidsell-height: 270px;
-$bidsell-header-height: 36px;
-
 .quote-box-component {
   .bidsell {
 
@@ -95,7 +98,7 @@ $bidsell-header-height: 36px;
             background-color: grey;
           }
           &.mid-price-down {
-            background-color: red;
+            background-color: $red;
           }
           .md-select-value {
             border-bottom-color: transparent;
@@ -113,7 +116,7 @@ $bidsell-header-height: 36px;
         text-align: right;
       }
       b {
-        color: blue;
+        color: $accent;
       }
     }
 
@@ -125,6 +128,9 @@ $bidsell-header-height: 36px;
         display: inline-flex;
         width: 100%;
       }
+        .asking-price, .selling-price {
+          text-align: center;
+        }
 
       .bid, .ask {
         position: relative;
@@ -138,8 +144,8 @@ $bidsell-header-height: 36px;
         text-align: center;
         font-size: small;
         font-weight: bolder;
-        color: white;
-        background-color: blue;
+        color:white;
+        background-color: $accent;
       }
       .numbers {
         height: 65%;
@@ -151,12 +157,12 @@ $bidsell-header-height: 36px;
 
     .badge {
       &.red {
-        background-color: red;
+        background-color: $red;
         color: white;
       }
       &.white {
         background-color: white;
-        color: red;
+        color: $red;
       }
     }
     &.box, .box {
@@ -167,6 +173,7 @@ $bidsell-header-height: 36px;
     }
   }
   .button-actions {
+    margin-top: 10px;
     height: 80px;
   }
   .cp {
